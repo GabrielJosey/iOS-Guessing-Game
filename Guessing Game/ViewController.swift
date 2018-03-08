@@ -13,12 +13,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var userGuessField: UITextField!
     
     
-    
     var randomNumber = Int(arc4random_uniform(100))
+    var userGuess: Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,10 +31,9 @@ class ViewController: UIViewController {
 
     @IBAction func guessButtonPressed(_ sender: Any) {
         
-        
+        userGuess = Int(userGuessField.text!)
+        print(userGuess)
     }
-    
-    
     
 
 }
