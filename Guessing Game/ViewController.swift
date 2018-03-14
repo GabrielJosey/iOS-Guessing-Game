@@ -43,21 +43,25 @@ class ViewController: UIViewController {
         var guesses = 0
         userGuess = Int(userGuessField.text!)
         
-        while guesses <= 5 {
+        while guesses < 5 {
             if userGuessField == nil {
                 userFeedback.text = "Please enter a valid number"
             } else if Int(userGuessField.text!)! > randomNumber {
                 userFeedback.text = "Too High. Guess again."
                 guesses += 1
+                //userGuessField.text = ""
             } else if Int(userGuessField.text!)! < randomNumber {
                 userFeedback.text = "Too low. Bump your guess up!"
                 guesses += 1
+               // userGuessField.text = ""
             } else if Int(userGuessField.text!)! == randomNumber {
                 userFeedback.text = "WAY TO GO!"
+                view.endEditing(true)
                 guesses = 5
-            } 
+               
+            }
         }
-        
+        userGuessField.text = ""
     }
     
 }
