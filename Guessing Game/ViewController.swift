@@ -16,21 +16,20 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var userFeedback: UILabel!
     
+    @IBOutlet weak var thumbsUp: UIImageView!
+    
+    @IBOutlet weak var theCount: UIImageView!
     
     var randomNumber = Int(arc4random_uniform(10))
     var userGuess: Int!
     
-    var rulesText = """
-    Guess a number between 1 and 10.
-    You have 5 tries to guess the correct number.
-    You will be told if the number is higher or lower.
-"""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        rulesLabel.text = rulesText
-        
+        thumbsUp.isHidden = true
+        theCount.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,14 +37,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var guesses = 0
+    
     @IBAction func guessButtonPressed(_ sender: Any) {
         
-        var guesses = 0
+        
         userGuess = Int(userGuessField.text!)
         
-        while guesses < 5 {
-            if userGuessField == nil {
-                userFeedback.text = "Please enter a valid number"
+        
+            if userGuessField.text == "" {
+                userFeedback.text = "Please enter a number"
             } else if Int(userGuessField.text!)! > randomNumber {
                 userFeedback.text = "Too High. Guess again."
                 guesses += 1
@@ -55,13 +56,32 @@ class ViewController: UIViewController {
                 guesses += 1
                // userGuessField.text = ""
             } else if Int(userGuessField.text!)! == randomNumber {
-                userFeedback.text = "WAY TO GO!"
+                userFeedback.text = "WAY TO GO! You guessed the number! Tap the monkey to play again."
                 view.endEditing(true)
+                theCount.isHidden = true
+                thumbsUp.isHidden = false
                 guesses = 5
                
             }
-        }
+        
         userGuessField.text = ""
     }
+    
+    
+    
+    @IBAction func resetGame(_ sender: Any) {
+        thumbsUp.isHidden = true
+        theCount.isHidden = false
+        userFeedback.text = ""
+        randomNumber = Int(arc4random_uniform(10))
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
 }
