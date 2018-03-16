@@ -84,8 +84,6 @@ class ViewController: UIViewController {
         userGuessField.text = ""
     }
     
-    
-    
     @IBAction func resetGame(_ sender: Any) {
         thumbsUp.isHidden = true
         failMonkey.isHidden = true
@@ -95,7 +93,6 @@ class ViewController: UIViewController {
         randomNumber = Int(arc4random_uniform(10))
         guesses = 0
         userGuessField.isEnabled = true
-        
     }
     
 }
