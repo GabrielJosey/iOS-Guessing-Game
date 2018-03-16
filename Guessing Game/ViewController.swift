@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     var randomNumber = Int(arc4random_uniform(10))
     var userGuess: Int!
     
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,11 @@ class ViewController: UIViewController {
         thumbsUp.isHidden = true
         theCount.isHidden = false
         failMonkey.isHidden = true
+        
+        // Makes it so if you tap away from key board key board goes away and if you tap in textfield keyboard reapears.the tap.cancels... is set to true so the keyboard does not go away after hitting the guess button. If it were set to false the keyboard would disapear anytime anything but the text field is clicked including the guess button
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = true
+        self.view.addGestureRecognizer(tap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,6 +76,7 @@ class ViewController: UIViewController {
             view.endEditing(true)
             theCount.isHidden = true
             thumbsUp.isHidden = false
+            userGuessField.isEnabled = false
             guesses = 5
             
         }
@@ -91,12 +97,5 @@ class ViewController: UIViewController {
         userGuessField.isEnabled = true
         
     }
-    
-    
-    
-    
-    
-    
-    
     
 }
